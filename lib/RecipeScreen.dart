@@ -1,5 +1,23 @@
 import 'package:flutter/material.dart';
 
+//widget for all section titles
+class SectionTitle extends StatelessWidget {
+  final String txt; // The parameter to hold the text to display
+  const SectionTitle({Key? key, required this.txt}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      txt, // Display the provided text
+      style: const TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        color: Color.fromRGBO(253, 93, 105, 1),
+      ),
+      softWrap: true, // Allow text to wrap to the next line if needed
+    );
+  }
+}
+
 class RecipeScreen extends StatefulWidget {
   @override
   State<RecipeScreen> createState() => _RecipeScreenState();
@@ -32,16 +50,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                     // title of the screen
                     Expanded(
                       child: Center(
-                        child: Text(
-                          'Recipe Details',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromRGBO(253, 93, 105, 1),
-                          ),
-                          softWrap:
-                              true, //to make text wrap when screen minimized
-                        ),
+                        child: SectionTitle(txt: "Recipe Details")
                       ),
                     ),
 
@@ -101,13 +110,21 @@ class _RecipeScreenState extends State<RecipeScreen> {
 
                 const SizedBox(height: 20),
                 // Details Section
-                const Text(
-                  'Description',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(253, 93, 105, 1),
-                  ),
+                Row(
+                  children: [
+                    SectionTitle(txt: "Description"),
+                    SizedBox(width: 8),
+                    Icon(
+                      Icons.alarm,
+                      size: 20,
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      '45 minutes',
+                      style: TextStyle(fontSize: 14),
+                      softWrap: true,
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 8),
                 const Text(
@@ -115,15 +132,17 @@ class _RecipeScreenState extends State<RecipeScreen> {
                   style: TextStyle(fontSize: 16),
                 ),
                 const SizedBox(height: 16),
-                // Ingredients Section
+                //cuisine section
+                SectionTitle(txt: "Cuisine"),
+                const SizedBox(height: 8),
                 const Text(
-                  'Ingredients',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(253, 93, 105, 1),
-                  ),
+                  'Egyptian',
+                  style: TextStyle(fontSize: 16),
                 ),
+                const SizedBox(height: 16),
+
+                // Ingredients Section
+                SectionTitle(txt: "Ingredients"),
                 const SizedBox(height: 8),
                 Column(
                   children: [
@@ -142,14 +161,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                 ),
                 const SizedBox(height: 20),
                 // Comments Section
-                const Text(
-                  'Comments',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(253, 93, 105, 1),
-                  ),
-                ),
+                SectionTitle(txt: "Comments"),
                 SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
