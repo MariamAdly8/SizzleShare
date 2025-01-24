@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 //widget for all section titles
 class SectionTitle extends StatelessWidget {
   final String txt; // The parameter to hold the text to display
-  const SectionTitle({Key? key, required this.txt}) : super(key: key);
+  const SectionTitle({super.key, required this.txt});
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -19,6 +19,8 @@ class SectionTitle extends StatelessWidget {
 }
 
 class RecipeScreen extends StatefulWidget {
+  const RecipeScreen({super.key});
+
   @override
   State<RecipeScreen> createState() => _RecipeScreenState();
 }
@@ -27,9 +29,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
   bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -195,8 +195,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
 
@@ -204,7 +203,7 @@ class IngredientRow extends StatelessWidget {
   final String quantity;
   final String name;
 
-  const IngredientRow({required this.quantity, required this.name});
+  const IngredientRow({super.key, required this.quantity, required this.name});
 
   @override
   Widget build(BuildContext context) {

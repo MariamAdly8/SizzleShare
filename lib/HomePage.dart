@@ -18,9 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0,
@@ -297,8 +295,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
 
@@ -306,7 +303,7 @@ class RecipeCard extends StatefulWidget {
   final String image;
   final String title;
 
-  const RecipeCard({required this.image, required this.title});
+  const RecipeCard({super.key, required this.image, required this.title});
 
   @override
   State<RecipeCard> createState() => _RecipeCardState();
@@ -406,7 +403,7 @@ class _RecipeCardState extends State<RecipeCard> {
 class CategoryChip extends StatefulWidget {
   final String label;
 
-  const CategoryChip({required this.label});
+  const CategoryChip({super.key, required this.label});
 
   @override
   State<CategoryChip> createState() => _CategoryChipState();
@@ -450,6 +447,8 @@ class _CategoryChipState extends State<CategoryChip> {
 }
 
 class FavoriteIcon extends StatefulWidget {
+  const FavoriteIcon({super.key});
+
   @override
   _FavoriteIconState createState() => _FavoriteIconState();
 }
@@ -486,7 +485,7 @@ class _FavoriteIconState extends State<FavoriteIcon> {
 class DetailPage extends StatelessWidget {
   final String title;
 
-  const DetailPage({required this.title});
+  const DetailPage({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

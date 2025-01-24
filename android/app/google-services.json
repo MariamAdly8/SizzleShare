@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "678430835771",
+    "project_id": "sizzleshare-ad1e0",
+    "storage_bucket": "sizzleshare-ad1e0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678430835771:android:489fdbd24fc532f015481e",
+        "android_client_info": {
+          "package_name": "com.example.sizzle_share"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeZNMESicXncxUS8b_EcL38PLjY2xCWz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
