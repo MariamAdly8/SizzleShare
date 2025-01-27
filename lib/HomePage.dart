@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizzle_share/RecipeScreen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,283 +20,281 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          actions: [
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFFC6C9),
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(16),
-              ),
-              child: const Icon(
-                Icons.notifications_outlined,
-                color: Color(0xFFEC888D),
-                size: 20,
-              ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFFFC6C9),
+              shape: const CircleBorder(),
+              padding: const EdgeInsets.all(16),
             ),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFFC6C9),
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(16),
-              ),
-              child: const Icon(
-                Icons.search,
-                color: Color(0xFFEC888D),
-                size: 20,
-              ),
+            child: const Icon(
+              Icons.notifications_outlined,
+              color: Color(0xFFEC888D),
+              size: 20,
             ),
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Hi! Dianne",
-                  style: TextStyle(
-                      color: Color(0xFFFD5D69),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFFFC6C9),
+              shape: const CircleBorder(),
+              padding: const EdgeInsets.all(16),
+            ),
+            child: const Icon(
+              Icons.search,
+              color: Color(0xFFEC888D),
+              size: 20,
+            ),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Hi! Dianne",
+                style: TextStyle(
+                    color: Color(0xFFFD5D69),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                "What are you cooking today",
+                style: TextStyle(fontSize: 16, color: Colors.black),
+              ),
+              const SizedBox(height: 16),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: const [
+                    CategoryChip(label: "Breakfast"),
+                    CategoryChip(label: "Lunch"),
+                    CategoryChip(label: "Dinner"),
+                    CategoryChip(label: "Vegan"),
+                    CategoryChip(label: "Keto Diet"),
+                    CategoryChip(label: "High-Cholesterol"),
+                    CategoryChip(label: "Low-Carb"),
+                    CategoryChip(label: "Desserts"),
+                  ],
                 ),
-                const SizedBox(height: 4),
-                const Text(
-                  "What are you cooking today",
-                  style: TextStyle(fontSize: 16, color: Colors.black),
-                ),
-                const SizedBox(height: 16),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: const [
-                      CategoryChip(label: "Breakfast"),
-                      CategoryChip(label: "Lunch"),
-                      CategoryChip(label: "Dinner"),
-                      CategoryChip(label: "Vegan"),
-                      CategoryChip(label: "Keto Diet"),
-                      CategoryChip(label: "High-Cholesterol"),
-                      CategoryChip(label: "Low-Carb"),
-                      CategoryChip(label: "Desserts"),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 24),
-                const Text(
-                  "Trending Recipe",
-                  style: TextStyle(
-                      color: Color(0xFFFD5D69),
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DetailPage(
-                          title: "Salami and Cheese Pizza",
-                        ),
-                      ),
-                    );
-                  },
-                  child: Card(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      side: const BorderSide(
-                        color: Color(0xFFEC888D),
-                        width: 1,
-                      ),
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                "Trending Recipe",
+                style: TextStyle(
+                    color: Color(0xFFFD5D69),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RecipeScreen(),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: const BorderRadius.vertical(
-                                  top: Radius.circular(16)),
-                              child: Image.asset(
-                                'assets/images/pizza.png',
-                                height: 200,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                              ),
+                  );
+                },
+                child: Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    side: const BorderSide(
+                      color: Color(0xFFEC888D),
+                      width: 1,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(16)),
+                            child: Image.asset(
+                              'assets/images/pizza.png',
+                              height: 200,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
                             ),
-                            Positioned(
-                              top: 8,
-                              right: 8,
-                              child: FavoriteIcon(),
+                          ),
+                          Positioned(
+                            top: 8,
+                            right: 8,
+                            child: FavoriteIcon(),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  "Salami and Cheese Pizza",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  "This is a quick overview of the ingredients...",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Row(
+                                  children: const [
+                                    Icon(Icons.alarm,
+                                        color: Color(0xFFEC888D), size: 16),
+                                    SizedBox(width: 4),
+                                    Text(
+                                      "30min",
+                                      style:
+                                          TextStyle(color: Color(0xFFEC888D)),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: const [
+                                    Icon(Icons.star_rate_rounded,
+                                        color: Color(0xFFEC888D), size: 16),
+                                    SizedBox(width: 4),
+                                    Text("5",
+                                        style: TextStyle(
+                                            color: Color(0xFFEC888D))),
+                                  ],
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    "Salami and Cheese Pizza",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(height: 4),
-                                  Text(
-                                    "This is a quick overview of the ingredients...",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Row(
-                                    children: const [
-                                      Icon(Icons.alarm,
-                                          color: Color(0xFFEC888D), size: 16),
-                                      SizedBox(width: 4),
-                                      Text(
-                                        "30min",
-                                        style:
-                                            TextStyle(color: Color(0xFFEC888D)),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: const [
-                                      Icon(Icons.star_rate_rounded,
-                                          color: Color(0xFFEC888D), size: 16),
-                                      SizedBox(width: 4),
-                                      Text("5",
-                                          style: TextStyle(
-                                              color: Color(0xFFEC888D))),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 24),
-                Card(
-                  color: const Color(0xFFFD5D69),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  elevation: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Suggested Recipes",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+              ),
+              const SizedBox(height: 24),
+              Card(
+                color: const Color(0xFFFD5D69),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                elevation: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Suggested Recipes",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
-                        const SizedBox(height: 8),
-                        SizedBox(
-                          height: 180,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              RecipeCard(
-                                image: 'assets/images/burger.png',
-                                title: 'Chicken Burger',
-                              ),
-                              RecipeCard(
-                                image: 'assets/images/tiramisu.jpg',
-                                title: 'Tiramisu',
-                              ),
-                              RecipeCard(
-                                image: 'assets/images/Caesar_Salad.jpg',
-                                title: 'Caesar Salad',
-                              ),
-                              RecipeCard(
-                                image: 'assets/images/Fresh_Sushi.jpg',
-                                title: 'Sushi Platter',
-                              ),
-                              RecipeCard(
-                                image: 'assets/images/pancakes.jpg',
-                                title: 'Pancakes',
-                              ),
-                            ],
-                          ),
+                      ),
+                      const SizedBox(height: 8),
+                      SizedBox(
+                        height: 180,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            RecipeCard(
+                              image: 'assets/images/burger.png',
+                              title: 'Chicken Burger',
+                            ),
+                            RecipeCard(
+                              image: 'assets/images/tiramisu.jpg',
+                              title: 'Tiramisu',
+                            ),
+                            RecipeCard(
+                              image: 'assets/images/Caesar_Salad.jpg',
+                              title: 'Caesar Salad',
+                            ),
+                            RecipeCard(
+                              image: 'assets/images/Fresh_Sushi.jpg',
+                              title: 'Sushi Platter',
+                            ),
+                            RecipeCard(
+                              image: 'assets/images/pancakes.jpg',
+                              title: 'Pancakes',
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        height: 70,
+        margin: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: const Color(0xFFFD5D69),
+          borderRadius: BorderRadius.circular(36),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10,
+              offset: Offset(0, 4),
             ),
-          ),
+          ],
         ),
-        bottomNavigationBar: Container(
-          height: 70,
-          margin: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: const Color(0xFFFD5D69),
-            borderRadius: BorderRadius.circular(36),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10,
-                offset: Offset(0, 4),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              icon: Icon(
+                Icons.home,
+                color: _selectedIndex == 0 ? Colors.white : Colors.white70,
               ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                icon: Icon(
-                  Icons.home,
-                  color: _selectedIndex == 0 ? Colors.white : Colors.white70,
-                ),
-                onPressed: () {
-                  _onBottomNavTap(0);
-                },
+              onPressed: () {
+                _onBottomNavTap(0);
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.favorite,
+                color: _selectedIndex == 1 ? Colors.white : Colors.white70,
               ),
-              IconButton(
-                icon: Icon(
-                  Icons.favorite,
-                  color: _selectedIndex == 1 ? Colors.white : Colors.white70,
-                ),
-                onPressed: () {
-                  _onBottomNavTap(1);
-                },
+              onPressed: () {
+                _onBottomNavTap(1);
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.person,
+                color: _selectedIndex == 2 ? Colors.white : Colors.white70,
               ),
-              IconButton(
-                icon: Icon(
-                  Icons.person,
-                  color: _selectedIndex == 2 ? Colors.white : Colors.white70,
-                ),
-                onPressed: () {
-                  _onBottomNavTap(2);
-                },
-              ),
-            ],
-          ),
+              onPressed: () {
+                _onBottomNavTap(2);
+              },
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }
 

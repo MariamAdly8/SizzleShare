@@ -67,48 +67,7 @@ class Signuppage extends StatelessWidget {
                 CustomTextField(
                   hintText: 'Enter your Email',
                 ),
-                SizedBox(height: 10.0),
-                Text(
-                  'Type',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 22, 22, 22),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 4.0),
-                DropdownButtonFormField<String>(
-                  value: selectedType,
-                  items: [
-                    DropdownMenuItem(
-                      value: "Male",
-                      child: Text("Male"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Female",
-                      child: Text("Female"),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    selectedType = value;
-                  },
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Color(0xFFFFC6C9),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(40.0),
-                      borderSide: BorderSide(
-                        color: Color(0xFFFFC6C9),
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(40.0),
-                      borderSide: BorderSide(
-                        color: Color(0xFFFD5D69),
-                      ),
-                    ),
-                  ),
-                ),
+                
                 SizedBox(height: 10.0),
                 Text(
                   'Password',
