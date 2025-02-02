@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const RecipeScreen(),
+                      builder: (context) => const RecipeScreen(recipeId: 'QTOiFviFmMN5i4IzBg83'),
                     ),
                   );
                 },
