@@ -44,6 +44,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
           }
+
           //recipe data stored in recipeData variable
           var recipeData = snapshot.data!.data() as Map<String, dynamic>;
           //store the list of ingredienets
@@ -100,37 +101,55 @@ class _RecipeScreenState extends State<RecipeScreen> {
                     const SizedBox(height: 10),
                     //recipe name and rate
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: const Color.fromRGBO(253, 93, 105, 1),
                       ),
-                      child: Row(
+                      child: Column(
                         children: [
-                          Expanded(
-                            child: Text(
-                              recipeData['recipe name'],
-                              style: TextStyle(
-                                fontSize: 22,
-                                color: Colors.white,
-                              ),
-                              softWrap: true,
-                            ),
+                          Image.network(
+                            Uri.parse(recipeData['imageURL']).toString(),
+                            height: 250,
+                            width: double.infinity,
+                            fit: BoxFit.fill,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(child: CircularProgressIndicator());
+                            },
+                            errorBuilder: (context, error, stackTrace) =>
+                                Icon(Icons.broken_image, size: 80),
                           ),
-                          IconButton(
-                            icon: Icon(
-                              Icons.star,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                            onPressed: () {},
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            recipeData['average rate'].toString(),
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    recipeData['recipe name'],
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      color: Colors.white,
+                                    ),
+                                    softWrap: true,
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.star,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
+                                  onPressed: () {},
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  recipeData['average rate'].toString(),
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
