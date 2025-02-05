@@ -26,7 +26,7 @@ class _SignuppageState extends State<Signuppage> {
   String? _confirmPasswordError;
 
   // default user type is 'user'
-  String _userType = 'user';
+  final String _userType = 'user';
 
   // sign up function
   Future<void> _signUp() async {
