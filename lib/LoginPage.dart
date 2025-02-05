@@ -1,10 +1,68 @@
 import 'package:flutter/material.dart';
-import 'package:sizzle_share/HomePage.dart';
-import 'package:sizzle_share/SignUpPage.dart';
-import 'package:sizzle_share/widgets/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'HomePage.dart';
+import 'SignUpPage.dart';
+import 'widgets/custom_text_field.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  void _login() async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      _showErrorMessage('Please enter both email and password.');
+      return;
+    }
+
+    try {
+      // تسجيل الدخول مباشرة
+      await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // نجاح تسجيل الدخول → الانتقال للصفحة الرئيسية
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        _showErrorMessage('No account found with this email.');
+      } else if (e.code == 'wrong-password') {
+        _showErrorMessage('Incorrect password. Please try again.');
+      } else if (e.code == 'invalid-credential') {
+        _showErrorMessage('No account found or incorrect password.');
+      } else {
+        _showErrorMessage('Error: ${e.message}');
+      }
+    } catch (e) {
+      _showErrorMessage('An unexpected error occurred. Please try again.');
+    }
+  }
+
+  void _showErrorMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,29 +86,27 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 90.0),
-              Text(
-                'Email',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 22, 22, 22),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              Text('Email',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 22, 22, 22),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  )),
               SizedBox(height: 9.0),
               CustomTextField(
+                controller: _emailController,
                 hintText: 'Enter your Email',
               ),
               SizedBox(height: 10.0),
-              Text(
-                'Password',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 22, 22, 22),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              Text('Password',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 22, 22, 22),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  )),
               SizedBox(height: 10.0),
               CustomTextField(
+                controller: _passwordController,
                 obscureText: true,
                 hintText: 'Enter your password',
                 suffixIcon: const Icon(Icons.visibility_off),
@@ -58,12 +114,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 60.0),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                    );
-                  },
+                  onPressed: _login,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFFFC6C9),
                     padding: const EdgeInsets.symmetric(
