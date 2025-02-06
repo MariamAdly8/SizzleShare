@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sizzle_share/CategoriesPage.dart';
 import 'package:sizzle_share/RecipeScreen.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -399,6 +399,8 @@ class _RecipeCardState extends State<RecipeCard> {
   }
 }
 
+
+
 class CategoryChip extends StatefulWidget {
   final String label;
 
@@ -426,19 +428,30 @@ class _CategoryChipState extends State<CategoryChip> {
             _isHovered = false;
           });
         },
-        child: Chip(
-          label: Text(
-            widget.label,
-            style: TextStyle(
-              color: _isHovered ? Colors.white : const Color(0xFFFD5D69),
+        child: GestureDetector(
+          onTap: () {
+            // Navigate to VeganRecipesPage with the selected category
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>CategoriesPage(categoryName: widget.label),
+              ),
+            );
+          },
+          child: Chip(
+            label: Text(
+              widget.label,
+              style: TextStyle(
+                color: _isHovered ? Colors.white : const Color(0xFFFD5D69),
+              ),
             ),
+            backgroundColor: _isHovered ? const Color(0xFFFD5D69) : Colors.white,
+            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50),
+            ),
+            side: BorderSide.none,
           ),
-          backgroundColor: _isHovered ? const Color(0xFFFD5D69) : Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-          ),
-          side: BorderSide.none,
         ),
       ),
     );
