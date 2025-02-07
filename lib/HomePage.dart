@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizzle_share/CategoriesPage.dart';
 import 'package:sizzle_share/RecipeScreen.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -15,6 +18,32 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  String firstName = "User"; // Default placeholder
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserFirstName();
+  }
+
+  Future<void> _getUserFirstName() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('users') // Replace with your Firestore collection name
+          .doc(user.uid)
+          .get();
+
+      if (userDoc.exists) {
+        String fullName = userDoc['name']; // Assuming the field is named 'name'
+        List<String> nameParts = fullName.split(" ");
+        setState(() {
+          firstName = nameParts.first; // Get only the first name
+        });
+      }
+    }
   }
 
   @override
@@ -59,8 +88,8 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Hi! Dianne",
+              Text(
+                "Hi! $firstName",
                 style: TextStyle(
                     color: Color(0xFFFD5D69),
                     fontSize: 24,
@@ -101,7 +130,8 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const RecipeScreen(recipeId: 'QTOiFviFmMN5i4IzBg83'),
+                      builder: (context) =>
+                          const RecipeScreen(recipeId: 'QTOiFviFmMN5i4IzBg83'),
                     ),
                   );
                 },
@@ -399,8 +429,6 @@ class _RecipeCardState extends State<RecipeCard> {
   }
 }
 
-
-
 class CategoryChip extends StatefulWidget {
   final String label;
 
@@ -434,7 +462,8 @@ class _CategoryChipState extends State<CategoryChip> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>CategoriesPage(categoryName: widget.label),
+                builder: (context) =>
+                    CategoriesPage(categoryName: widget.label),
               ),
             );
           },
@@ -445,7 +474,8 @@ class _CategoryChipState extends State<CategoryChip> {
                 color: _isHovered ? Colors.white : const Color(0xFFFD5D69),
               ),
             ),
-            backgroundColor: _isHovered ? const Color(0xFFFD5D69) : Colors.white,
+            backgroundColor:
+                _isHovered ? const Color(0xFFFD5D69) : Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50),
