@@ -540,15 +540,20 @@ class _RecipeCardState extends State<RecipeCard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DetailPage(
-              recipeId: widget.recipeId,
-              title: widget.title,
+        final recipeId = widget.recipeId;
+        if (recipeId != null && recipeId.isNotEmpty) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RecipeScreen(recipeId: recipeId),
             ),
-          ),
-        );
+          );
+        } else {
+          print("Error: Recipe ID is missing or empty!");
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Error: Recipe not found.")),
+          );
+        }
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
