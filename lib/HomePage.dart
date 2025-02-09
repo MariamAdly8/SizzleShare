@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   String firstName = "User";
   List<Map<String, dynamic>> suggestedRecipes = [];
-  Map<String, dynamic>? trendingRecipe;
+  Map<String, dynamic> trendingRecipe = {};
   bool isLoading = true;
   void _onBottomNavTap(int index) {
     setState(() {
@@ -193,11 +193,16 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   // Background Image
                   Positioned.fill(
-                    child: Image.network(
-                      trendingRecipe!['imageURL'] ?? '',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                      child: Image.network(
+                    trendingRecipe?['imageURL'] ?? '',
+                    fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(child: CircularProgressIndicator());
+                    },
+                    errorBuilder: (context, error, stackTrace) =>
+                        Icon(Icons.broken_image, size: 80),
+                  )),
                   // Dark overlay for better text visibility
                   Positioned.fill(
                     child: Container(
