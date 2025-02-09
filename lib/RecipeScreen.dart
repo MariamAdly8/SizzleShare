@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-//widget for all section titles
+// Widget for all section titles
 class SectionTitle extends StatelessWidget {
   final String txt; // The parameter to hold the text to display
   const SectionTitle({super.key, required this.txt});
@@ -33,24 +33,25 @@ class _RecipeScreenState extends State<RecipeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //return recipe data for this recipeId
+    // Return recipe data for this recipeId
     return StreamBuilder<DocumentSnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('recipes')
-            .doc(widget.recipeId)
-            .snapshots(),
-        builder: (context, snapshot) {
-          //if there is no data
-          if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
-          }
+      stream: FirebaseFirestore.instance
+          .collection('recipes')
+          .doc(widget.recipeId)
+          .snapshots(),
+      builder: (context, snapshot) {
+        // If there is no data
+        if (!snapshot.hasData) {
+          return Center(child: CircularProgressIndicator());
+        }
 
-          //recipe data stored in recipeData variable
-          var recipeData = snapshot.data!.data() as Map<String, dynamic>;
-          //store the list of ingredienets
-          List<dynamic> ingredients = recipeData['ingredients'] ?? [];
-          return Scaffold(
-            body: SingleChildScrollView(
+        // Recipe data stored in recipeData variable
+        var recipeData = snapshot.data!.data() as Map<String, dynamic>;
+        List<dynamic> ingredients = recipeData['ingredients'] ?? [];
+
+        return Scaffold(
+          body: SafeArea( // Wrap the body content with SafeArea
+            child: SingleChildScrollView( // Ensure scrollview is inside SafeArea
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -60,7 +61,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        //arrow back
+                        // Arrow back
                         IconButton(
                           icon: const Icon(Icons.arrow_back),
                           color: const Color.fromRGBO(253, 93, 105, 1),
@@ -69,13 +70,12 @@ class _RecipeScreenState extends State<RecipeScreen> {
                           },
                         ),
 
-                        // title of the screen
+                        // Title of the screen
                         Expanded(
-                          child: Center(
-                              child: SectionTitle(txt: "Recipe Details")),
+                          child: Center(child: SectionTitle(txt: "Recipe Details")),
                         ),
 
-                        // favorite button
+                        // Favorite button
                         Container(
                           height: 35,
                           decoration: BoxDecoration(
@@ -99,7 +99,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    //recipe name and rate
+                    // Recipe name and rate
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
@@ -117,7 +117,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                               return Center(child: CircularProgressIndicator());
                             },
                             errorBuilder: (context, error, stackTrace) =>
-                                Icon(Icons.broken_image, size: 80),
+                            const Icon(Icons.broken_image, size: 80),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(10),
@@ -126,7 +126,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                 Expanded(
                                   child: Text(
                                     recipeData['recipe name'],
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 22,
                                       color: Colors.white,
                                     ),
@@ -134,7 +134,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                   ),
                                 ),
                                 IconButton(
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.star,
                                     color: Colors.white,
                                     size: 30,
@@ -144,7 +144,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                 const SizedBox(width: 4),
                                 Text(
                                   recipeData['average rate'].toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 18,
                                     color: Colors.white,
                                   ),
@@ -155,15 +155,14 @@ class _RecipeScreenState extends State<RecipeScreen> {
                         ],
                       ),
                     ),
-
                     const SizedBox(height: 20),
 
-                    //cuisine section
+                    // Cuisine section
                     SectionTitle(txt: "Cuisine"),
                     const SizedBox(height: 8),
                     Text(
                       recipeData['cuisine'],
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 16),
 
@@ -179,19 +178,20 @@ class _RecipeScreenState extends State<RecipeScreen> {
                       }).toList(),
                     ),
                     const SizedBox(height: 20),
+
                     // Details Section
                     Row(
                       children: [
                         SectionTitle(txt: "Description"),
-                        SizedBox(width: 8),
-                        Icon(
+                        const SizedBox(width: 8),
+                        const Icon(
                           Icons.alarm,
                           size: 20,
                         ),
-                        SizedBox(width: 4),
+                        const SizedBox(width: 4),
                         Text(
                           recipeData['total time'],
-                          style: TextStyle(fontSize: 14),
+                          style: const TextStyle(fontSize: 14),
                           softWrap: true,
                         ),
                       ],
@@ -199,16 +199,17 @@ class _RecipeScreenState extends State<RecipeScreen> {
                     const SizedBox(height: 8),
                     Text(
                       recipeData['description'],
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 16),
+
                     // Comments Section
                     SectionTitle(txt: "Comments"),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Container(
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Color.fromRGBO(253, 93, 105, 1),
+                          color: const Color.fromRGBO(253, 93, 105, 1),
                         ),
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -218,7 +219,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                           Expanded(
                             child: TextField(
                               controller: controller,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: 'Add a comment...',
                                 border: InputBorder.none,
                               ),
@@ -240,8 +241,10 @@ class _RecipeScreenState extends State<RecipeScreen> {
                 ),
               ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }
 
