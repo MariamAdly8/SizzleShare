@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Login Section -->
+        <div id="auth-section" class="auth-section">
+            <div class="auth-container">
+                <h1>Recipe Admin Panel</h1>
+                
+                <!-- Login Form -->
+                <div id="login-form" class="auth-form">
+                    <h2>Admin Login</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email:</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password:</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                    <p class="admin-note">Admin accounts are created by system administrators only.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="dashboard-section" style="display: none;">
+            <header class="dashboard-header">
+                <h1>Admin Dashboard</h1>
+                <div class="user-info">
+                    <span id="adminName"></span>
+                    <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+                </div>
+            </header>
+
+            <main class="dashboard-main">
+                <!-- Navigation Tabs -->
+                <div class="nav-tabs">
+                    <button class="tab-btn active" data-tab="recipes">Recipe Management</button>
+                    <button class="tab-btn" data-tab="users">User Management</button>
+                </div>
+
+                <!-- Recipes Tab -->
+                <div id="recipes-tab" class="tab-content active">
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <h3>Pending Recipes</h3>
+                            <span id="pendingCount">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Approved Recipes</h3>
+                            <span id="approvedCount">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Rejected Recipes</h3>
+                            <span id="rejectedCount">0</span>
+                        </div>
+                    </div>
+
+                    <div class="recipes-section">
+                        <h2>Recipe Requests</h2>
+                        <div id="recipesList" class="recipes-list">
+                            <!-- Recipes will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Tab -->
+                <div id="users-tab" class="tab-content">
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <h3>Total Users</h3>
+                            <span id="totalUsersCount">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Active Users</h3>
+                            <span id="activeUsersCount">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Banned Users</h3>
+                            <span id="bannedUsersCount">0</span>
+                        </div>
+                    </div>
+
+                    <div class="users-section">
+                        <h2>User Management</h2>
+                        <div id="usersList" class="users-list">
+                            <!-- Users will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Ban User Modal -->
+    <div id="banModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Ban User</h2>
+            <form id="banUserForm">
+                <div class="form-group">
+                    <p>Are you sure you want to ban this user?</p>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeBanModal()">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Ban User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Management Modal -->
+    <div id="userModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>User Management</h2>
+            <div id="userModalContent">
+                <!-- User info will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,45 @@
+{
+  "recipeName": "Spaghetti Carbonara",
+  "description": [
+    "Classic Italian pasta dish with creamy sauce",
+    "Simple and delicious carbonara recipe",
+    "Perfect for a quick dinner"
+  ],
+  "totalTime": 25,
+  "cuisine": "Italian",
+  "ingredients": [
+    {
+      "name": "spaghetti",
+      "quantity": "400g"
+    },
+    {
+      "name": "bacon",
+      "quantity": "200g"
+    },
+    {
+      "name": "eggs",
+      "quantity": "4 large"
+    },
+    {
+      "name": "parmesan cheese",
+      "quantity": "100g"
+    },
+    {
+      "name": "black pepper",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "name": "salt",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "name": "garlic",
+      "quantity": "2 cloves"
+    },
+    {
+      "name": "olive oil",
+      "quantity": "2 tablespoons"
+    }
+  ],
+  "category": ["Dinner", "Quick & Easy"]
+} 
