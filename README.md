@@ -53,7 +53,4 @@ Follow these steps to run the project locally.
 * MongoDB (Local or Atlas URL)
 * Git
 
-### 1. Clone the Repository
-```bash
-git clone [https://github.com/yourusername/sizzle-share.git](https://github.com/yourusername/sizzle-share.git)
-cd sizzle-share
+
